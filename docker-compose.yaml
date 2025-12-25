@@ -1,0 +1,73 @@
+services:
+  badmerging:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # CUDA base for GPU. If you want CPU-only, see "badmerging-cpu" below.
+        BASE_IMAGE: nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
+        USERNAME: app
+        UID: 1000
+        GID: 1000
+
+    container_name: badmerging
+    working_dir: /app
+    command: ["bash", "-lc", "sleep infinity"]
+
+    # Mount repo so you can edit on host
+    volumes:
+      - ./:/app
+      # Keep datasets and outputs persistent
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
+      - ./shadow_head:/app/shadow_head
+      - ./trigger:/app/trigger
+      # Cache (faster downloads)
+      - ./_cache:/app/.cache
+
+    environment:
+      - HF_HOME=/app/.cache/huggingface
+      - TORCH_HOME=/app/.cache/torch
+      - XDG_CACHE_HOME=/app/.cache
+
+    # GPU (requires NVIDIA Container Toolkit)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    # Nice to have for large dataloaders
+    shm_size: "8gb"
+
+    tty: true
+    stdin_open: true
+
+  # CPU-only option (no CUDA)
+  badmerging-cpu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BASE_IMAGE: ubuntu:22.04
+        USERNAME: app
+        UID: 1000
+        GID: 1000
+    container_name: badmerging_cpu
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
+      - ./shadow_head:/app/shadow_head
+      - ./trigger:/app/trigger
+      - ./_cache:/app/.cache
+    environment:
+      - HF_HOME=/app/.cache/huggingface
+      - TORCH_HOME=/app/.cache/torch
+      - XDG_CACHE_HOME=/app/.cache
+    shm_size: "8gb"
+    tty: true
+    stdin_open: true

@@ -67,3 +67,9 @@ If you find our work useful for your research, please consider citing the paper:
   year={2024}
 }
 ```
+
+## Docker (api stub)
+
+1. Copy `.env.example` to `.env` and update the values as needed.
+2. Build and start the container: `docker compose up --build`.
+3. Check the health endpoint: `curl http://localhost:8080/health`.
