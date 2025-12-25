@@ -1,0 +1,12 @@
+====================================================================================================
+Finetuning ViT-B-32 on CIFAR100
+====================================================================================================
+Loading ViT-B-32 pre-trained weights.
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/finetune_clean.py", line 135, in <module>
+    finetune(args)
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/finetune_clean.py", line 19, in finetune
+    image_encoder = ImageEncoder(args, keep_lang=False)
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/modeling.py", line 18, in __init__
+    self.model, self.train_preprocess, self.val_preprocess = open_clip.create_model_and_transforms(
+AttributeError: module 'open_clip' has no attribute 'create_model_and_transforms'

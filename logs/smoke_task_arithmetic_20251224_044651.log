@@ -1,0 +1,42 @@
+Clean 22 1 5.0
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingon.py", line 51, in <module>
+    image_encoder = torch.load(pretrained_checkpoint)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './checkpoints/ViT-B-32/zeroshot.pt'
+On 22 1 5.0
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingon.py", line 51, in <module>
+    image_encoder = torch.load(pretrained_checkpoint)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './checkpoints/ViT-B-32/zeroshot.pt'
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingoff.py", line 52, in <module>
+    image_encoder = torch.load(pretrained_checkpoint)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './checkpoints/ViT-B-32/zeroshot.pt'
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingoff.py", line 52, in <module>
+    image_encoder = torch.load(pretrained_checkpoint)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/eguchi/miniconda3/envs/BackdoorDPA/lib/python3.10/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './checkpoints/ViT-B-32/zeroshot.pt'

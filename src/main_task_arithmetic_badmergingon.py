@@ -12,6 +12,7 @@ from utils import *
 import torchvision.transforms as transforms
 from PIL import Image
 import torchvision.utils as vutils
+import open_clip
 
 def create_log_dir(path, filename='log.txt'):
     import logging
@@ -48,12 +49,29 @@ print(attack_type, patch_size, target_cls, alpha)
 model = args.model
 args.save = os.path.join(args.ckpt_dir,model)
 pretrained_checkpoint = os.path.join(args.save, 'zeroshot.pt')
-image_encoder = torch.load(pretrained_checkpoint)
+
+# ---- load zeroshot image encoder from state_dict (safe) ----
+state = torch.load(pretrained_checkpoint, map_location="cpu")
+
+# build model skeleton (no pretrained weights)
+clip_model, preprocess_train, preprocess_val = open_clip.create_model_and_transforms("ViT-B-32", pretrained=None)
+
+image_encoder = clip_model.visual
+missing, unexpected = image_encoder.load_state_dict(state, strict=False)
+
+# (optional) print to log for debugging
+print("load_state_dict missing:", len(missing), "unexpected:", len(unexpected))
+
+image_encoder = image_encoder.to(args.device)
+image_encoder.eval()
+
+# if later code needs the full model's state_dict-style object
+ptm_check = image_encoder.state_dict()
 
 
 ### Trigger     
 args.trigger_dir = f'./trigger/{model}'
-preprocess_fn = image_encoder.train_preprocess
+preprocess_fn = preprocess_train
 normalizer = preprocess_fn.transforms[-1]
 inv_normalizer = NormalizeInverse(normalizer.mean, normalizer.std)
 if attack_type=='Clean':
@@ -97,7 +115,6 @@ for dataset_name in exam_datasets:
         ckpt_name = os.path.join(args.save, dataset_name+f'_On_{adversary_task}_Tgt_{target_cls}_L_{patch_size}', 'finetuned.pt')
     ft_checks.append(torch.load(ckpt_name).state_dict())
     print(ckpt_name)
-ptm_check = torch.load(pretrained_checkpoint).state_dict()
 
 remove_keys = []
 flat_ft = torch.vstack([state_dict_to_vector(check, remove_keys) for check in ft_checks])

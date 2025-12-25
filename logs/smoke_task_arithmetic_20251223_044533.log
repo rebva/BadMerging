@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingon.py", line 7, in <module>
+    from src.modeling import ImageEncoder
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/modeling.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingon.py", line 7, in <module>
+    from src.modeling import ImageEncoder
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/modeling.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingoff.py", line 7, in <module>
+    from src.modeling import ImageEncoder
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/modeling.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/main_task_arithmetic_badmergingoff.py", line 7, in <module>
+    from src.modeling import ImageEncoder
+  File "/mnt/ssd2tb/eguchi/docker/BadMerging/src/modeling.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
