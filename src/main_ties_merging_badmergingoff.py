@@ -1,4 +1,5 @@
 import os
+import torch
 # os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 import time
 import sys
@@ -119,6 +120,12 @@ merged_tv = ties_merging(tv_flat_checks, reset_thresh=K, merge_func=merge_func,)
 merged_check = flat_ptm + scaling_coef_ * merged_tv
 merged_state_dict = vector_to_state_dict(merged_check, ptm_check, remove_keys=remove_keys)
 image_encoder.load_state_dict(merged_state_dict, strict=False)
+
+out_dir = os.path.join("checkpoints", model, "merged")
+os.makedirs(out_dir, exist_ok=True)
+out_path = os.path.join(out_dir, f"ties_{attack_type}_{adversary_task}_{target_task}.pt")
+torch.save(merged_state_dict, out_path)
+print("Saved merged state_dict to:", out_path)
 
 
 ### Evaluation

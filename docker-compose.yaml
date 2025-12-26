@@ -15,6 +15,9 @@ services:
     entrypoint: ["/usr/bin/bash", "/app/scripts/withlog.sh"]
     command: ["bash", "-lc", "sleep infinity"]
 
+    # 👇 add this line
+    gpus: all
+
     volumes:
       - ./:/app
       - ./logs:/app/logs
@@ -24,14 +27,6 @@ services:
       - ./shadow_head:/app/shadow_head
       - ./trigger:/app/trigger
       - ./_cache:/app/.cache
-
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
 
     shm_size: "8gb"
     tty: true

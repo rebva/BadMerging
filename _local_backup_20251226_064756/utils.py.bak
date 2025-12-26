@@ -70,7 +70,7 @@ def torch_save(model, save_path):
 
 
 def torch_load(save_path, device=None):
-    model = torch.load(save_path, weights_only=False)
+    model = torch.load(save_path)
     if device is not None:
         model = model.to(device)
     return model

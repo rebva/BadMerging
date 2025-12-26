@@ -1,4 +1,5 @@
 import os
+import torch
 # import numpy as np
 import time
 import sys
@@ -131,6 +132,12 @@ for i in range(len(tv_flat_checks)):
 merged_state_dict = vector_to_state_dict(merged_check, ptm_check, remove_keys=remove_keys)
 if use_merged_model:
     image_encoder.load_state_dict(merged_state_dict, strict=False)
+
+out_dir = os.path.join("checkpoints", model, "merged")
+os.makedirs(out_dir, exist_ok=True)
+out_path = os.path.join(out_dir, f"task_arithmetic_{attack_type}_{adversary_task}_{target_task}.pt")
+torch.save(merged_state_dict, out_path)
+print("Saved merged state_dict to:", out_path)
 
 
 ### Evaluation
